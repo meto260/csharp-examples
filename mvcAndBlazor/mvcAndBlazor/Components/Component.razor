@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ProtectedSessionStorage storage
+<h1>@counter</h1>
+
+<div>
+    <button @onclick="onePlus">Arttır</button>
+</div>
+
+
+@code {
+    public int counter { get; set; } = 0;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (storage is not null)
+        {
+            counter = (await storage.GetAsync<int>("counter")).Value;
+            StateHasChanged();
+        }
+    }
+
+    private async Task onePlus(MouseEventArgs mouseEventArgs)
+    {
+        if (storage is not null)
+        {
+            counter = (await storage.GetAsync<int>("counter")).Value;
+        }
+        counter++;
+        await storage.SetAsync("counter", counter);
+    }
+}

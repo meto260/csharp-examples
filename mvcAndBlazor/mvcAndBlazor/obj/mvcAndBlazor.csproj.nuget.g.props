@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\metin.yakar\.nuget\packages\;C:\Microsoft\Xamarin\NuGet\</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.8.1</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="$([MSBuild]::EnsureTrailingSlash($(NuGetPackageFolders)))" />
+  </ItemGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Content Include="$(NuGetPackageRoot)blazority\0.4.24\contentFiles\any\netstandard2.1\bundleconfig.json" Condition="Exists('$(NuGetPackageRoot)blazority\0.4.24\contentFiles\any\netstandard2.1\bundleconfig.json')">
+      <NuGetPackageId>Blazority</NuGetPackageId>
+      <NuGetPackageVersion>0.4.24</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Private>False</Private>
+      <Link>bundleconfig.json</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)blazority\0.4.24\contentFiles\any\netstandard2.1\libman.json" Condition="Exists('$(NuGetPackageRoot)blazority\0.4.24\contentFiles\any\netstandard2.1\libman.json')">
+      <NuGetPackageId>Blazority</NuGetPackageId>
+      <NuGetPackageVersion>0.4.24</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Private>False</Private>
+      <Link>libman.json</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)blazority\0.4.24\contentFiles\any\netstandard2.1\package-lock.json" Condition="Exists('$(NuGetPackageRoot)blazority\0.4.24\contentFiles\any\netstandard2.1\package-lock.json')">
+      <NuGetPackageId>Blazority</NuGetPackageId>
+      <NuGetPackageVersion>0.4.24</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Private>False</Private>
+      <Link>package-lock.json</Link>
+    </Content>
+  </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)blazority\0.4.24\buildTransitive\Blazority.props" Condition="Exists('$(NuGetPackageRoot)blazority\0.4.24\buildTransitive\Blazority.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\metin.yakar\.nuget\packages\microsoft.codeanalysis.analyzers\3.0.0</PkgMicrosoft_CodeAnalysis_Analyzers>
+  </PropertyGroup>
+</Project>
