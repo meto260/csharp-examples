@@ -1,0 +1,22 @@
+﻿@page "/counter"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Microsoft.AspNetCore.Components.Authorization
+@using Newtonsoft.Json
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<br />
+
+@if (IsAuthorized()) {
+    <h1>
+        IsAuthenticated
+    </h1>
+    <div>
+        <button class="btn btn-primary" @onclick="AuthButClick">Authvalue</button>
+    </div>
+    <h2>
+        @msgdata
+    </h2>
+}

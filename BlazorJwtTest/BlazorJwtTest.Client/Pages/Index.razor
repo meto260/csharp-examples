@@ -1,0 +1,79 @@
+﻿@page "/"
+
+<div class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center h-100">
+
+        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+
+            <EditForm Model="@userLoginRequest" OnValidSubmit="LoginFormSubmit">
+                <DataAnnotationsValidator />
+
+                <div class="form-group">
+                    <input @bind-value="userLoginRequest.Username" class="form-control form-control-lg" type="text" placeholder="username" />
+                </div>
+                <div class="form-group">
+                    <input @bind-value="userLoginRequest.Password" class="form-control form-control-lg" type="password" placeholder="password" />
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-info btn-block">Login</button>
+                </div>
+
+            </EditForm>
+
+        </div>
+
+    </div>
+</div>
+
+@code {
+    [Inject]
+    HttpClient Client { get; set; }
+    
+    [Inject]
+    NavigationManager NavManager { get; set; }
+
+    [Inject]
+    ILocalStorageService localStorageService { get; set; }
+
+    [Inject]
+    AuthenticationStateProvider authenticationStateProvider { get; set; }
+
+    public string ErrorMessage { get; set; }
+
+    private LoginModel userLoginRequest = new LoginModel();
+
+
+    private async Task LoginFormSubmit()
+    {
+        var httpReqRes = await Client.PostAsJsonAsync("api/Login/Login", userLoginRequest);
+
+        if (httpReqRes.IsSuccessStatusCode)
+        {
+            try
+            {
+                var res = await httpReqRes.Content.ReadFromJsonAsync<ServiceResponse<LoginResult>>();
+
+                if (res.Status) {
+                    await localStorageService.SetItemAsync("token", res.Data.Token);
+                    await localStorageService.SetItemAsync("username", res.Data.user.username);
+                    await localStorageService.SetItemAsync("role", res.Data.user.role);
+                    await localStorageService.SetItemAsync("UserFullName", res.Data.user.fullname);
+
+                    (authenticationStateProvider as AuthStateManager).NotifyUserLogin(res.Data.user.username, res.Data.user.role);
+
+                    Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", res.Data.Token);
+
+                    NavManager.NavigateTo("/counter");
+                }
+                else {
+                    ErrorMessage = res.Message;
+                }
+            }
+            catch (Exception ex) {
+                ErrorMessage = ex.Message;
+            }
+        }
+
+    }
+}
